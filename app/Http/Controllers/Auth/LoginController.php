@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
 
     public function login(Request $request)
     {
@@ -21,8 +17,8 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $token = auth()->user()->createToken('YourAppName')->accessToken;
-            return redirect()->intended('/api/products');
+            $token = auth()->user()->createToken('Korespond-Microservice')->accessToken;
+            return response()->json(['access_token' => $token], 200);
         }
 
         return back()->withErrors([

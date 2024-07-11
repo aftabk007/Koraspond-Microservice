@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
-    }
+    // public function showRegistrationForm()
+    // {
+    //     return view('auth.register');
+    // }
 
     public function register(Request $request)
     {
@@ -34,6 +34,6 @@ class RegisterController extends Controller
         ]);
 
         $token = $user->createToken('Korespond-Microservice')->accessToken;
-        return redirect()->route('login');
+        return response()->json(['access_token' => $token], 201);
     }
 }

@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +23,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
-Route::middleware('auth:api')->post('logout', [AuthController::class, 'logout']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [LoginController::class, 'login']);
+Route::middleware('auth:api')->post('logout', [LogoutController::class, 'logout']);
 
 Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::apiResource('products', ProductController::class);
